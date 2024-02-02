@@ -1,0 +1,34 @@
+extend schema
+  @auth(
+    providers: [
+      { type: jwt, issuer: "grafbase", secret: "R6C2EX3aQREchxmmJaRm/yKJmSCeeW2R+vJiTVoR934=" }
+    ]
+    rules: [
+      { allow: private }
+    ]
+  )type User @model @auth(
+    rules: [
+      { allow: public, operations: [read] }
+    ]) {
+  name: String! @length(min: 2, max: 100)
+  email: String! @unique
+  avatarUrl: URL!
+  description: String @length(min: 2, max: 1000)
+  githubUrl: URL
+  linkedinUrl: URL
+  projects: [Project!]
+}
+
+type Project @model @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      { allow: private, operations: [create, delete, update] }
+    ]) {
+  title: String! @length(min: 3)
+  description: String!
+  image: URL!
+  liveSiteUrl: URL!
+  githubUrl: URL!
+  category: String! @search
+  createdBy: User!
+}
