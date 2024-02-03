@@ -4,7 +4,7 @@ import cv2
 from matplotlib import pyplot as plt
 
 # Load the pre-trained model
-model = tf.saved_model.load("./ssdlite_mobilenet_v2_coco")
+model = tf.saved_model.load("/ssdlite_mobilenet_v2_coco/saveModel")
 
 # Load the label map (if needed)
 # You may need to create a label map file if it's not provided with the model
